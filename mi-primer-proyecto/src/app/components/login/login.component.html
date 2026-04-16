@@ -1,0 +1,54 @@
+<section class="login-page">
+  <mat-card class="login-card">
+    <div class="eyebrow">Fake authentication</div>
+    <h1>Ingreso a la biblioteca</h1>
+    <p>
+      Usa tus datos para entrar. Si el correo no existe, el frontend creara un usuario en el
+      backend para facilitar la presentacion.
+    </p>
+
+    <form [formGroup]="loginForm" (ngSubmit)="submit()" class="login-form">
+      <div class="grid">
+        <mat-form-field appearance="outline">
+          <mat-label>Nombre</mat-label>
+          <input matInput formControlName="nombre" />
+          @if (loginForm.controls.nombre.invalid && loginForm.controls.nombre.touched) {
+            <mat-error>Ingresa un nombre valido.</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Correo electronico</mat-label>
+          <input matInput type="email" formControlName="email" />
+          @if (loginForm.controls.email.invalid && loginForm.controls.email.touched) {
+            <mat-error>Ingresa un correo valido.</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Telefono</mat-label>
+          <input matInput formControlName="telefono" />
+          @if (loginForm.controls.telefono.invalid && loginForm.controls.telefono.touched) {
+            <mat-error>Ingresa un telefono valido.</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Direccion</mat-label>
+          <input matInput formControlName="direccion" />
+          @if (loginForm.controls.direccion.invalid && loginForm.controls.direccion.touched) {
+            <mat-error>Ingresa una direccion valida.</mat-error>
+          }
+        </mat-form-field>
+      </div>
+
+      <button mat-flat-button type="submit" class="submit-btn" [disabled]="loading()">
+        @if (loading()) {
+          <mat-spinner diameter="20"></mat-spinner>
+        } @else {
+          <span>Entrar al catalogo</span>
+        }
+      </button>
+    </form>
+  </mat-card>
+</section>

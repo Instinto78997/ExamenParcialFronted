@@ -1,0 +1,93 @@
+:host {
+  display: block;
+}
+
+.page-header {
+  margin-bottom: 1.5rem;
+}
+
+.eyebrow {
+  margin-bottom: 0.5rem;
+  color: #b86b00;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(2rem, 4vw, 3rem);
+}
+
+.page-header p {
+  margin: 0.6rem 0 0;
+  color: #4f5f76;
+}
+
+.loading-state,
+.empty-card {
+  display: grid;
+  place-items: center;
+  gap: 1rem;
+  min-height: 300px;
+}
+
+.reservas-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1rem;
+}
+
+.reserva-card {
+  border-radius: 24px;
+}
+
+.card-top {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+h2 {
+  margin: 0 0 1rem;
+}
+
+.details {
+  display: grid;
+  gap: 0.6rem;
+  color: #44546b;
+}
+
+.estado-activa {
+  background: #dff7e8;
+  color: #166534;
+}
+
+.estado-cancelada {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+.estado-devuelta {
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+
+mat-card-actions {
+  display: flex;
+  gap: 0.75rem;
+}
+
+mat-card-actions button {
+  flex: 1;
+  border-radius: 999px;
+}
+
+@media (max-width: 640px) {
+  .card-top,
+  mat-card-actions {
+    flex-direction: column;
+  }
+}

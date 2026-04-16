@@ -1,0 +1,36 @@
+@import '@angular/material/prebuilt-themes/azure-blue.css';
+
+:root {
+  color-scheme: light;
+  --app-bg: radial-gradient(circle at top, #f4ddae 0%, #f5efe2 30%, #edf3fb 100%);
+  --card-bg: rgba(255, 252, 246, 0.88);
+  --text-main: #162033;
+}
+
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  color: var(--text-main);
+  font-family: 'Manrope', sans-serif;
+  background: var(--app-bg);
+}
+
+h1,
+h2,
+h3,
+.mat-mdc-card-title {
+  font-family: 'Bitter', serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.mat-mdc-card {
+  background: var(--card-bg) !important;
+  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.08) !important;
+}

@@ -1,0 +1,95 @@
+:host {
+  display: block;
+  min-height: 100vh;
+}
+
+.shell {
+  min-height: 100vh;
+}
+
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  gap: 1rem;
+  min-height: 72px;
+  padding: 0 1rem;
+  background: rgba(11, 36, 71, 0.92);
+  color: #f7f4ea;
+  backdrop-filter: blur(14px);
+  box-shadow: 0 16px 40px rgba(8, 16, 31, 0.18);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  cursor: pointer;
+}
+
+.brand mat-icon {
+  transform: scale(1.2);
+}
+
+.brand div {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+
+.brand span {
+  font-size: 0.78rem;
+  color: rgba(247, 244, 234, 0.72);
+}
+
+.spacer {
+  flex: 1;
+}
+
+.nav-links {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.active-link {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.user-chip {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.55rem 0.9rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.logout-btn,
+.login-btn {
+  border-radius: 999px;
+}
+
+.content {
+  padding: 1.5rem;
+}
+
+@media (max-width: 760px) {
+  .topbar {
+    flex-wrap: wrap;
+    padding-bottom: 1rem;
+  }
+
+  .brand,
+  .nav-links,
+  .user-chip,
+  .logout-btn,
+  .login-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .content {
+    padding: 1rem;
+  }
+}

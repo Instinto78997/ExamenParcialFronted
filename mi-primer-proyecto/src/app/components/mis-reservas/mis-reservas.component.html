@@ -1,0 +1,63 @@
+<section class="page-header">
+  <div>
+    <div class="eyebrow">Ruta /mis-reservas</div>
+    <h1>Mis reservas</h1>
+    <p>Administra tus reservas activas, canceladas o devueltas.</p>
+  </div>
+</section>
+
+@if (loading()) {
+  <section class="loading-state">
+    <mat-spinner diameter="42"></mat-spinner>
+    <p>Cargando reservas...</p>
+  </section>
+} @else {
+  <section class="reservas-grid">
+    @for (reserva of reservasDetalladas(); track reserva.id) {
+      <mat-card class="reserva-card">
+        <mat-card-content>
+          <div class="card-top">
+            <h2>{{ reserva.libroTitulo }}</h2>
+            <mat-chip [ngClass]="'estado-' + reserva.estado">{{ reserva.estado }}</mat-chip>
+          </div>
+          <div class="details">
+            <span><strong>Reserva:</strong> {{ reserva.fechaReserva | date: 'mediumDate' }}</span>
+            <span>
+              <strong>Entrega esperada:</strong>
+              {{ reserva.fechaDevolucionEsperada | date: 'mediumDate' }}
+            </span>
+            <span>
+              <strong>Devolucion real:</strong>
+              {{ reserva.fechaDevolucionReal ? (reserva.fechaDevolucionReal | date: 'mediumDate') : 'Pendiente' }}
+            </span>
+          </div>
+        </mat-card-content>
+        <mat-card-actions>
+          <button
+            mat-stroked-button
+            type="button"
+            [disabled]="reserva.estado !== 'activa' || actionReservaId() === reserva.id"
+            (click)="cancelarReserva(reserva.id)"
+          >
+            Cancelar
+          </button>
+          <button
+            mat-flat-button
+            type="button"
+            [disabled]="reserva.estado !== 'activa' || actionReservaId() === reserva.id"
+            (click)="devolverReserva(reserva.id)"
+          >
+            Devolver
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    } @empty {
+      <mat-card class="empty-card">
+        <mat-card-content>
+          <h2>Aun no tienes reservas</h2>
+          <p>Ve al catalogo para reservar un libro y luego administrarlo desde esta vista.</p>
+        </mat-card-content>
+      </mat-card>
+    }
+  </section>
+}

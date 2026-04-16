@@ -1,0 +1,93 @@
+:host {
+  display: block;
+}
+
+.page-header {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.eyebrow {
+  margin-bottom: 0.5rem;
+  color: #b86b00;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(2rem, 4vw, 3rem);
+}
+
+.page-header p {
+  margin: 0.6rem 0 0;
+  color: #4f5f76;
+}
+
+.loading-state,
+.empty-card {
+  display: grid;
+  place-items: center;
+  gap: 1rem;
+  min-height: 300px;
+}
+
+.book-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1rem;
+}
+
+.book-card {
+  border-radius: 24px;
+}
+
+.book-meta,
+.book-info {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+}
+
+.book-meta {
+  align-items: center;
+  margin-bottom: 1rem;
+  color: #64748b;
+}
+
+h2 {
+  margin: 0 0 1rem;
+}
+
+.book-info {
+  margin-bottom: 1rem;
+  color: #425066;
+}
+
+.availability {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  color: #b3261e;
+}
+
+.availability.available {
+  color: #166534;
+}
+
+mat-card-actions button {
+  width: 100%;
+  border-radius: 999px;
+}
+
+@media (max-width: 720px) {
+  .page-header {
+    align-items: start;
+    flex-direction: column;
+  }
+}

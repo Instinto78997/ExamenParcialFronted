@@ -1,0 +1,28 @@
+<div class="shell">
+  <mat-toolbar class="topbar">
+    <div class="brand" routerLink="/catalogo">
+      <mat-icon>auto_stories</mat-icon>
+      <div>
+        <strong>BiblioApp</strong>
+        <span>Parcial Frontend</span>
+      </div>
+    </div>
+    <span class="spacer"></span>
+    @if (currentUser(); as user) {
+      <nav class="nav-links">
+        <a mat-button routerLink="/catalogo" routerLinkActive="active-link">Catalogo</a>
+        <a mat-button routerLink="/mis-reservas" routerLinkActive="active-link">Mis reservas</a>
+      </nav>
+      <div class="user-chip">
+        <mat-icon>person</mat-icon>
+        <span>{{ user.nombre }}</span>
+      </div>
+      <button mat-flat-button type="button" class="logout-btn" (click)="logout()">Salir</button>
+    } @else {
+      <a mat-flat-button routerLink="/login" class="login-btn">Ingresar</a>
+    }
+  </mat-toolbar>
+  <main class="content">
+    <router-outlet />
+  </main>
+</div>

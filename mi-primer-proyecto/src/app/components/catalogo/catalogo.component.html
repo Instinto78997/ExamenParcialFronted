@@ -1,0 +1,60 @@
+<section class="page-header">
+  <div>
+    <div class="eyebrow">Ruta /catalogo</div>
+    <h1>Catalogo de libros</h1>
+    <p>Consulta los libros y reserva solo los que siguen disponibles.</p>
+  </div>
+  <mat-slide-toggle
+    [checked]="showOnlyAvailable()"
+    (change)="onToggleDisponibles($event.checked)"
+  >
+    Mostrar solo disponibles
+  </mat-slide-toggle>
+</section>
+
+@if (loading()) {
+  <section class="loading-state">
+    <mat-spinner diameter="42"></mat-spinner>
+    <p>Cargando catalogo...</p>
+  </section>
+} @else {
+  <section class="book-grid">
+    @for (libro of librosConCategoria(); track libro.id) {
+      <mat-card class="book-card">
+        <mat-card-content>
+          <div class="book-meta">
+            <mat-chip>{{ libro.categoriaNombre }}</mat-chip>
+            <span>{{ libro.editorial }}</span>
+          </div>
+          <h2>{{ libro.titulo }}</h2>
+          <div class="book-info">
+            <span><strong>ISBN:</strong> {{ libro.isbn }}</span>
+            <span><strong>Anio:</strong> {{ libro.anoPublicacion }}</span>
+            <span><strong>Total:</strong> {{ libro.ejemplaresTotal }}</span>
+          </div>
+          <div class="availability" [class.available]="libro.ejemplaresDisponibles > 0">
+            <mat-icon>{{ libro.ejemplaresDisponibles > 0 ? 'check_circle' : 'cancel' }}</mat-icon>
+            <span>{{ libro.ejemplaresDisponibles }} disponibles</span>
+          </div>
+        </mat-card-content>
+        <mat-card-actions>
+          <button
+            mat-flat-button
+            type="button"
+            [disabled]="libro.ejemplaresDisponibles <= 0 || reservandoLibroId() === libro.id"
+            (click)="reservar(libro)"
+          >
+            {{ reservandoLibroId() === libro.id ? 'Reservando...' : 'Reservar' }}
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    } @empty {
+      <mat-card class="empty-card">
+        <mat-card-content>
+          <h2>No hay libros para mostrar</h2>
+          <p>Prueba desactivar el filtro o revisa que el backend tenga datos.</p>
+        </mat-card-content>
+      </mat-card>
+    }
+  </section>
+}
