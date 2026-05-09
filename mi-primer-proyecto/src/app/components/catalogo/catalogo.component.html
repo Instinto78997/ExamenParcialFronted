@@ -1,15 +1,29 @@
 <section class="page-header">
   <div>
-    <div class="eyebrow">Ruta /catalogo</div>
+    <div class="eyebrow">Biblioteca digital</div>
     <h1>Catalogo de libros</h1>
-    <p>Consulta los libros y reserva solo los que siguen disponibles.</p>
+    <p>Explora portadas, disponibilidad y categorias antes de reservar tu proxima lectura.</p>
   </div>
-  <mat-slide-toggle
-    [checked]="showOnlyAvailable()"
-    (change)="onToggleDisponibles($event.checked)"
-  >
-    Mostrar solo disponibles
-  </mat-slide-toggle>
+  <div class="header-actions">
+    <div class="metric">
+      <strong>{{ totalLibros() }}</strong>
+      <span>titulos</span>
+    </div>
+    <div class="metric">
+      <strong>{{ totalDisponibles() }}</strong>
+      <span>disponibles</span>
+    </div>
+    <div class="metric">
+      <strong>{{ categoriasActivas() }}</strong>
+      <span>areas</span>
+    </div>
+    <mat-slide-toggle
+      [checked]="showOnlyAvailable()"
+      (change)="onToggleDisponibles($event.checked)"
+    >
+      Solo disponibles
+    </mat-slide-toggle>
+  </div>
 </section>
 
 @if (loading()) {
@@ -21,6 +35,21 @@
   <section class="book-grid">
     @for (libro of librosConCategoria(); track libro.id) {
       <mat-card class="book-card">
+        <div class="book-cover">
+          <img
+            [src]="getPortadaUrl(libro)"
+            [alt]="'Portada de ' + libro.titulo"
+            loading="lazy"
+            (error)="onPortadaError($event)"
+          />
+          <div class="cover-fallback">
+            <mat-icon>auto_stories</mat-icon>
+            <span>{{ libro.titulo }}</span>
+          </div>
+          <span class="stock-badge" [class.available]="libro.ejemplaresDisponibles > 0">
+            {{ libro.ejemplaresDisponibles > 0 ? 'Disponible' : 'Reservado' }}
+          </span>
+        </div>
         <mat-card-content>
           <div class="book-meta">
             <mat-chip>{{ libro.categoriaNombre }}</mat-chip>
@@ -41,9 +70,11 @@
           <button
             mat-flat-button
             type="button"
+            color="primary"
             [disabled]="libro.ejemplaresDisponibles <= 0 || reservandoLibroId() === libro.id"
             (click)="reservar(libro)"
           >
+            <mat-icon>{{ reservandoLibroId() === libro.id ? 'hourglass_top' : 'bookmark_add' }}</mat-icon>
             {{ reservandoLibroId() === libro.id ? 'Reservando...' : 'Reservar' }}
           </button>
         </mat-card-actions>

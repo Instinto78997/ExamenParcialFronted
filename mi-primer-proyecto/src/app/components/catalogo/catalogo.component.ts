@@ -42,6 +42,13 @@ export class CatalogoComponent implements OnInit {
         'Sin categoria'
     }))
   );
+  readonly totalLibros = computed(() => this.libros().length);
+  readonly totalDisponibles = computed(() =>
+    this.libros().reduce((total, libro) => total + libro.ejemplaresDisponibles, 0)
+  );
+  readonly categoriasActivas = computed(
+    () => new Set(this.libros().map((libro) => libro.categoriaId).filter(Boolean)).size
+  );
 
   ngOnInit(): void {
     this.loadCategorias();
@@ -82,6 +89,20 @@ export class CatalogoComponent implements OnInit {
           });
         }
       });
+  }
+
+  getPortadaUrl(libro: Libro): string {
+    if (libro.portadaUrl) {
+      return libro.portadaUrl;
+    }
+
+    const isbn = libro.isbn.replace(/[^0-9X]/gi, '');
+    return `https://covers.openlibrary.org/b/isbn/${isbn}-L.jpg?default=false`;
+  }
+
+  onPortadaError(event: Event): void {
+    const image = event.target as HTMLImageElement;
+    image.hidden = true;
   }
 
   private loadLibros(): void {
